@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SkillBridge | Academia-Industry Collaboration</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+            width: 250px;
+            height: 100vh;
+            background: #0f172a;
+            color: white;
+            padding: 25px 18px;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            padding: 5px 12px 30px;
+        }
+
+        .logo h1 {
+            font-size: 25px;
+            color: #38bdf8;
+        }
+
+        .logo p {
+            color: #94a3b8;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .menu {
+            list-style: none;
+        }
+
+        .menu li {
+            margin: 7px 0;
+        }
+
+        .menu a {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            text-decoration: none;
+            color: #94a3b8;
+            padding: 13px 15px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .sidebar-bottom {
+            position: absolute;
+            bottom: 25px;
+            left: 18px;
+            right: 18px;
+            background: #1e293b;
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        .sidebar-bottom p {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .sidebar-bottom strong {
+            display: block;
+            margin-top: 5px;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 250px;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            height: 75px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 35px;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 500;
+        }
+
+        .header-title p {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .header-title h2 {
+            font-size: 20px;
+            margin-top: 3px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .search {
+            background: #f1f5f9;
+            padding: 10px 15px;
+            border-radius: 10px;
+            width: 220px;
+        }
+
+        .search input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+        }
+
+        .notification {
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .profile {
+            width: 42px;
+            height: 42px;
+            background: #2563eb;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        /* ================= CONTENT ================= */
+
+        .content {
+            padding: 35px;
+        }
+
+        .welcome {
+            margin-bottom: 30px;
+        }
+
+        .welcome small {
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        .welcome h1 {
+            font-size: 30px;
+            margin-top: 5px;
+        }
+
+        .welcome p {
+            color: #64748b;
+            margin-top: 8px;
+        }
+
+        /* ================= STAT CARDS ================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 22px;
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+        }
+
+        .stat-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 21px;
+            margin-bottom: 18px;
+        }
+
+        .blue {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .purple {
+            background: #f5f3ff;
+            color: #7c3aed;
+        }
+
+        .green {
+            background: #ecfdf5;
+            color: #059669;
+        }
+
+        .orange {
+            background: #fff7ed;
+            color: #ea580c;
+        }
+
+        .stat-card p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .stat-card h2 {
+            font-size: 28px;
+            margin-top: 5px;
+        }
+
+        .growth {
+            color: #059669;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* ================= DASHBOARD GRID ================= */
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .card-header h3 {
+            font-size: 18px;
+        }
+
+        .card-header p {
+            color: #64748b;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .view-btn {
+            color: #2563eb;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* ================= SKILLS ================= */
+
+        .skill {
+            margin-bottom: 20px;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+
+        .progress {
+            height: 9px;
+            background: #e2e8f0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 20px;
+            background: linear-gradient(90deg, #2563eb, #06b6d4);
+        }
+
+        .skill-demand {
+            font-size: 11px;
+            color: #64748b;
+            margin-top: 5px;
+        }
+
+        /* ================= CAREER SCORE ================= */
+
+        .career-card {
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            color: white;
+        }
+
+        .career-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            font-size: 24px;
+        }
+
+        .career-card small {
+            display: block;
+            margin-top: 25px;
+            color: #dbeafe;
+        }
+
+        .score {
+            font-size: 55px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .career-card p {
+            color: #dbeafe;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+
+        .career-btn {
+            width: 100%;
+            padding: 13px;
+            margin-top: 25px;
+            border: none;
+            border-radius: 10px;
+            background: white;
+            color: #2563eb;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* ================= SECTION ================= */
+
+        .section {
+            margin-top: 35px;
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title h2 {
+            font-size: 21px;
+        }
+
+        .section-title p {
+            color: #64748b;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        /* ================= INTERNSHIPS ================= */
+
+        .internships {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .internship-card {
+            background: white;
+            padding: 22px;
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+            transition: 0.3s;
+        }
+
+        .internship-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+
+        .company-logo {
+            width: 45px;
+            height: 45px;
+            border-radius: 11px;
+            background: #0f172a;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .internship-top {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .tag {
+            background: #ecfdf5;
+            color: #059669;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 6px 10px;
+            border-radius: 20px;
+        }
+
+        .company {
+            color: #94a3b8;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+
+        .internship-card h3 {
+            margin-top: 5px;
+        }
+
+        .location {
+            color: #64748b;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 15px;
+        }
+
+        .skill-tag {
+            background: #f1f5f9;
+            color: #475569;
+            padding: 6px 9px;
+            border-radius: 7px;
+            font-size: 11px;
+        }
+
+        .apply-btn {
+            width: 100%;
+            margin-top: 18px;
+            padding: 12px;
+            border: none;
+            background: #0f172a;
+            color: white;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .apply-btn:hover {
+            background: #2563eb;
+        }
+
+        /* ================= AI SECTION ================= */
+
+        .ai-section {
+            margin-top: 35px;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            border-radius: 20px;
+            padding: 30px;
+        }
+
+        .ai-section h2 {
+            font-size: 22px;
+        }
+
+        .ai-section p {
+            color: #cbd5e1;
+            margin-top: 8px;
+        }
+
+        .recommendations {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .recommendation {
+            background: rgba(255,255,255,0.07);
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .recommendation span {
+            font-size: 25px;
+        }
+
+        .recommendation h3 {
+            margin-top: 10px;
+            font-size: 15px;
+        }
+
+        .recommendation p {
+            font-size: 12px;
+        }
+
+        /* ================= PLACEMENTS ================= */
+
+        .placement-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .placement-table th,
+        .placement-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 13px;
+        }
+
+        .placement-table th {
+            background: #f8fafc;
+            color: #64748b;
+        }
+
+        .match {
+            color: #059669;
+            font-weight: bold;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            margin-top: 50px;
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 25px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width: 1100px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .internships {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width: 800px) {
+
+            .sidebar {
+                transform: translateX(-100%);
+                transition: 0.3s;
+            }
+
+            .sidebar.show {
+                transform: translateX(0);
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .search {
+                display: none;
+            }
+
+            header {
+                padding: 0 20px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .internships {
+                grid-template-columns: 1fr;
+            }
+
+            .recommendations {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width: 550px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome h1 {
+                font-size: 25px;
+            }
+
+            .header-title h2 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+        <h1>SkillBridge</h1>
+        <p>Academia × Industry</p>
+    </div>
+
+    <ul class="menu">
+
+        <li>
+            <a href="#dashboard" class="active">
+                📊 Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="#skills">
+                🧠 Skill Mapping
+            </a>
+        </li>
+
+        <li>
+            <a href="#internships">
+                💼 Internships
+            </a>
+        </li>
+
+        <li>
+            <a href="#placements">
+                🎓 Placements
+            </a>
+        </li>
+
+        <li>
+            <a href="#companies">
+                🏢 Companies
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                👥 Students
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                ⚙️ Settings
+            </a>
+        </li>
+
+    </ul>
+
+    <div class="sidebar-bottom">
+        <p>Need assistance?</p>
+        <strong>Contact Placement Cell</strong>
+    </div>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="main">
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="header-title">
+
+            <span class="mobile-menu" onclick="toggleMenu()">☰</span>
+
+            <p>ACADEMIA • INDUSTRY COLLABORATION</p>
+
+            <h2>Student Dashboard</h2>
+
+        </div>
+
+        <div class="header-right">
+
+            <div class="search">
+                🔍
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search internships..."
+                    onkeyup="searchInternships()"
+                >
+            </div>
+
+            <div class="notification">
+                🔔
+            </div>
+
+            <div class="profile">
+                AS
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- CONTENT -->
+
+    <div class="content">
+
+        <!-- WELCOME -->
+
+        <section class="welcome" id="dashboard">
+
+            <small>GOOD AFTERNOON 👋</small>
+
+            <h1>Welcome back, Arjun</h1>
+
+            <p>
+                Here's your academic and career collaboration overview.
+            </p>
+
+        </section>
+
+
+        <!-- STATISTICS -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+
+                <div class="stat-icon blue">
+                    🧠
+                </div>
+
+                <p>Skill Match</p>
+
+                <h2>78%</h2>
+
+                <span class="growth">↑ 12% this month</span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+                    💼
+                </div>
+
+                <p>Internships</p>
+
+                <h2>24</h2>
+
+                <span class="growth">8 new opportunities</span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    🏆
+                </div>
+
+                <p>Applications</p>
+
+                <h2>09</h2>
+
+                <span class="growth">3 shortlisted</span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange">
+                    📈
+                </div>
+
+                <p>Placement Readiness</p>
+
+                <h2>86%</h2>
+
+                <span class="growth">↑ 5%</span>
+
+            </div>
+
+        </section>
+
+
+        <!-- SKILL + CAREER -->
+
+        <section class="dashboard-grid" id="skills">
+
+            <!-- SKILLS -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div>
+                        <h3>Skill Gap Analysis</h3>
+
+                        <p>
+                            Compare your skills with current industry demand.
+                        </p>
+                    </div>
+
+                    <button class="view-btn">
+                        View Details →
+                    </button>
+
+                </div>
+
+
+                <div class="skill">
+
+                    <div class="skill-info">
+                        <strong>JavaScript</strong>
+                        <span>85%</span>
+                    </div>
+
+                    <div class="progress">
+                        <div
+                            class="progress-bar"
+                            style="width:85%">
+                        </div>
+                    </div>
+
+                    <div class="skill-demand">
+                        Industry demand: High
+                    </div>
+
+                </div>
+
+
+                <div class="skill">
+
+                    <div class="skill-info">
+                        <strong>React</strong>
+                        <span>72%</span>
+                    </div>
+
+                    <div class="progress">
+                        <div
+                            class="progress-bar"
+                            style="width:72%">
+                        </div>
+                    </div>
+
+                    <div class="skill-demand">
+                        Industry demand: High
+                    </div>
+
+                </div>
+
+
+                <div class="skill">
+
+                    <div class="skill-info">
+                        <strong>Python</strong>
+                        <span>65%</span>
+                    </div>
+
+                    <div class="progress">
+                        <div
+                            class="progress-bar"
+                            style="width:65%">
+                        </div>
+                    </div>
+
+                    <div class="skill-demand">
+                        Industry demand: Very High
+                    </div>
+
+                </div>
+
+
+                <div class="skill">
+
+                    <div class="skill-info">
+                        <strong>SQL</strong>
+                        <span>58%</span>
+                    </div>
+
+                    <div class="progress">
+                        <div
+                            class="progress-bar"
+                            style="width:58%">
+                        </div>
+                    </div>
+
+                    <div class="skill-demand">
+                        Industry demand: High
+                    </div>
+
+                </div>
+
+
+                <div class="skill">
+
+                    <div class="skill-info">
+                        <strong>Cloud Computing</strong>
+                        <span>42%</span>
+                    </div>
+
+                    <div class="progress">
+                        <div
+                            class="progress-bar"
+                            style="width:42%">
+                        </div>
+                    </div>
+
+                    <div class="skill-demand">
+                        Industry demand: Very High
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CAREER READINESS -->
+
+            <div class="card career-card">
+
+                <div class="career-icon">
+                    🎯
+                </div>
+
+                <small>
+                    CAREER READINESS SCORE
+                </small>
+
+                <div class="score">
+                    86%
+                </div>
+
+                <p>
+                    You're on track. Strengthen your Cloud Computing
+                    and SQL skills to improve your placement opportunities.
+                </p>
+
+                <button class="career-btn"
+                        onclick="improveSkills()">
+                    Improve My Skills →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- INTERNSHIPS -->
+
+        <section class="section" id="internships">
+
+            <div class="section-title">
+
+                <div>
+                    <h2>Recommended Internships</h2>
+
+                    <p>
+                        Opportunities matched to your skill profile.
+                    </p>
+                </div>
+
+                <button class="view-btn">
+                    View All →
+                </button>
+
+            </div>
+
+
+            <div class="internships" id="internshipList">
+
+
+                <!-- CARD 1 -->
+
+                <div class="internship-card">
+
+                    <div class="internship-top">
+
+                        <div class="company-logo">
+                            T
+                        </div>
+
+                        <span class="tag">
+                            Hybrid
+                        </span>
+
+                    </div>
+
+                    <div class="company">
+                        TECHNOVA SOLUTIONS
+                    </div>
+
+                    <h3>
+                        Frontend Developer Intern
+                    </h3>
+
+                    <div class="location">
+                        📍 Chennai, India
+                    </div>
+
+                    <div class="skills">
+
+                        <span class="skill-tag">
+                            React
+                        </span>
+
+                        <span class="skill-tag">
+                            JavaScript
+                        </span>
+
+                        <span class="skill-tag">
+                            Git
+                        </span>
+
+                    </div>
+
+                    <button
+                        class="apply-btn"
+                        onclick="apply('Frontend Developer Intern')">
+                        View Opportunity →
+                    </button>
+
+                </div>
+
+
+                <!-- CARD 2 -->
+
+                <div class="internship-card">
+
+                    <div class="internship-top">
+
+                        <div class="company-logo">
+                            D
+                        </div>
+
+                        <span class="tag">
+                            On-site
+                        </span>
+
+                    </div>
+
+                    <div class="company">
+                        DATASPHERE LABS
+                    </div>
+
+                    <h3>
+                        Data Science Intern
+                    </h3>
+
+                    <div class="location">
+                        📍 Bangalore, India
+                    </div>
+
+                    <div class="skills">
+
+                        <span class="skill-tag">
+                            Python
+                        </span>
+
+                        <span class="skill-tag">
+                            SQL
+                        </span>
+
+                        <span class="skill-tag">
+                            Machine Learning
+                        </span>
+
+                    </div>
+
+                    <button
+                        class="apply-btn"
+                        onclick="apply('Data Science Intern')">
+                        View Opportunity →
+                    </button>
+
+                </div>
+
+
+                <!-- CARD 3 -->
+
+                <div class="internship-card">
+
+                    <div class="internship-top">
+
+                        <div class="company-logo">
+                            C
+                        </div>
+
+                        <span class="tag">
+                            Remote
+                        </span>
+
+                    </div>
+
+                    <div class="company">
+                        CLOUDEDGE TECHNOLOGIES
+                    </div>
+
+                    <h3>
+                        Cloud Engineering Intern
+                    </h3>
+
+                    <div class="location">
+                        📍 Remote
+                    </div>
+
+                    <div class="skills">
+
+                        <span class="skill-tag">
+                            AWS
+                        </span>
+
+                        <span class="skill-tag">
+                            Docker
+                        </span>
+
+                        <span class="skill-tag">
+                            Linux
+                        </span>
+
+                    </div>
+
+                    <button
+                        class="apply-btn"
+                        onclick="apply('Cloud Engineering Intern')">
+                        View Opportunity →
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- AI RECOMMENDATIONS -->
+
+        <section class="ai-section">
+
+            <h2>
+                🤖 AI-Powered Career Recommendations
+            </h2>
+
+            <p>
+                Based on your skills and current industry requirements,
+                we recommend the following learning paths.
+            </p>
+
+
+            <div class="recommendations">
+
+                <div class="recommendation">
+
+                    <span>☁️</span>
+
+                    <h3>
+                        Learn Cloud Computing
+                    </h3>
+
+                    <p>
+                        AWS and Azure skills are highly demanded
+                        by current employers.
+                    </p>
+
+                </div>
+
+
+                <div class="recommendation">
+
+                    <span>🗄️</span>
+
+                    <h3>
+                        Improve SQL
+                    </h3>
+
+                    <p>
+                        Strengthen database and query optimization
+                        skills.
+                    </p>
+
+                </div>
+
+
+                <div class="recommendation">
+
+                    <span>🐳</span>
+
+                    <h3>
+                        Learn Docker
+                    </h3>
+
+                    <p>
+                        Containerization skills can improve your
+                        cloud engineering profile.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PLACEMENTS -->
+
+        <section class="section" id="placements">
+
+            <div class="section-title">
+
+                <div>
+                    <h2>Placement Opportunities</h2>
+
+                    <p>
+                        Jobs matched with your profile.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <table class="placement-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>Company</th>
+                            <th>Position</th>
+                            <th>Location</th>
+                            <th>Match</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>TechNova</td>
+                            <td>Software Engineer</td>
+                            <td>Chennai</td>
+                            <td class="match">94%</td>
+                            <td>Open</td>
+                        </tr>
+
+                        <tr>
+                            <td>Infosphere</td>
+                            <td>Full Stack Developer</td>
+                            <td>Bangalore</td>
+                            <td class="match">89%</td>
+                            <td>Open</td>
+                        </tr>
+
+                        <tr>
+                            <td>CloudEdge</td>
+                            <td>Cloud Engineer</td>
+                            <td>Hyderabad</td>
+                            <td class="match">82%</td>
+                            <td>Open</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- COMPANIES -->
+
+        <section class="section" id="companies">
+
+            <div class="section-title">
+
+                <div>
+                    <h2>Industry Partners</h2>
+
+                    <p>
+                        Companies collaborating with academia.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="internships">
+
+                <div class="internship-card">
+                    <div class="company-logo">T</div>
+                    <h3>TechNova Solutions</h3>
+                    <p class="location">
+                        Software & Technology
+                    </p>
+                </div>
+
+                <div class="internship-card">
+                    <div class="company-logo">D</div>
+                    <h3>DataSphere Labs</h3>
+                    <p class="location">
+                        Data & Artificial Intelligence
+                    </p>
+                </div>
+
+                <div class="internship-card">
+                    <div class="company-logo">C</div>
+                    <h3>CloudEdge Technologies</h3>
+                    <p class="location">
+                        Cloud & DevOps
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 SkillBridge |
+        Academia–Industry Collaboration Platform |
+        SIH26044
+
+    </footer>
+
+</div>
+
+
+<script>
+
+    /* ================= MOBILE MENU ================= */
+
+    function toggleMenu() {
+
+        const sidebar =
+            document.getElementById("sidebar");
+
+        sidebar.classList.toggle("show");
+
+    }
+
+
+    /* ================= APPLY ================= */
+
+    function apply(position) {
+
+        alert(
+            "Application started for: " +
+            position
+        );
+
+    }
+
+
+    /* ================= IMPROVE SKILLS ================= */
+
+    function improveSkills() {
+
+        document
+            .getElementById("skills")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+        alert(
+            "Recommended focus areas: Cloud Computing, SQL and Docker."
+        );
+
+    }
+
+
+    /* ================= SEARCH ================= */
+
+    function searchInternships() {
+
+        const input =
+            document
+            .getElementById("searchInput")
+            .value
+            .toLowerCase();
+
+        const cards =
+            document.querySelectorAll(
+                ".internship-card"
+            );
+
+        cards.forEach(card => {
+
+            const text =
+                card.innerText.toLowerCase();
+
+            if (text.includes(input)) {
+
+                card.style.display = "";
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+    }
+
+
+    /* ================= NAVIGATION ================= */
+
+    const links =
+        document.querySelectorAll(".menu a");
+
+    links.forEach(link => {
+
+        link.addEventListener(
+            "click",
+            function() {
+
+                links.forEach(item =>
+                    item.classList.remove("active")
+                );
+
+                this.classList.add("active");
+
+            }
+        );
+
+    });
+
+</script>
+
+</body>
+</html>
